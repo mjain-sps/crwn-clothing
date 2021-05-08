@@ -5,7 +5,12 @@ function MenuItem({ item }) {
     <div className="menuitem-overflow-wrapper">
       <div
         className="menuitem-wrapper"
-        style={{ background: `url(${item.imageUrl})` }}
+        style={{
+          background: `url(${item.imageUrl})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
       >
         <div className="menuitem-content">
           <h2>{item.title}</h2>

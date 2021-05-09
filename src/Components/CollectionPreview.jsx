@@ -1,6 +1,8 @@
 import React from "react";
 import ShopData from "../Data/shop.data.js";
 import CollectionItem from "./CollectionItem";
+import "../CSS/CollectionPreview/collection-preview.scss";
+
 class CollectionPreview extends React.Component {
   constructor() {
     super();
@@ -14,8 +16,16 @@ class CollectionPreview extends React.Component {
     return (
       <div className="collection-preview-wrapper">
         {collection.map((item) => {
-          return;
-          <CollectionItem key={item.key} item={item} />;
+          return (
+            <>
+              <div>
+                <h1>{item.title.toUpperCase()}</h1>
+              </div>
+              <div>
+                <CollectionItem key={item.key} items={item.items} />
+              </div>
+            </>
+          );
         })}
       </div>
     );

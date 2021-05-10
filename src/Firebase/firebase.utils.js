@@ -1,6 +1,6 @@
 import Firebase from "firebase/app";
-import auth from "firebase/auth";
-import firestore from "firebase/firestore";
+import "firebase/auth";
+import "firebase/firestore";
 
 const config = {
   apiKey: "AIzaSyADG9UCbvPxRjc26AB51-IhJtQbxJjpwWg",
@@ -13,6 +13,41 @@ const config = {
 
 Firebase.initializeApp(config);
 
-export const { auth, firestore };
+export const auth = Firebase.auth();
+export const firestore = Firebase.firestore();
 
+//Provider to enable google popin signup
+const provider = new Firebase.auth.GoogleAuthProvider();
+// provider.setCustomParameters({prompt:'select_account'})
+provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
+provider.setCustomParameters({
+  login_hint: "user@example.com",
+});
+
+//Function which will pop-up Google Sign-in
+export const signInWithGoogle = () => {
+  Firebase.auth().signInWithPopup(provider);
+};
+
+export const createUserProfile = async (user, additionalData) => {
+  if (!user) return;
+
+  const userRef = firestore.doc(`users/${user.uid}`);
+  const userSnapShot = await userRef.get();
+  if (!userSnapShot.exists) {
+    const { displayName, email } = user;
+    const createdAt = new Date();
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      });
+    } catch (error) {
+      console.log(`error ${error.message}`);
+    }
+  }
+  return userRef;
+};
 export default Firebase;

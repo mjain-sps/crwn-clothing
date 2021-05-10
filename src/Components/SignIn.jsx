@@ -1,6 +1,10 @@
 import React from "react";
 import Input from "../Components/Input";
+import CustomButton from "../Components/CustomButton";
 import "../CSS/AuthCSS/signin.scss";
+
+//Import Firebase Functions
+import { signInWithGoogle } from "../Firebase/firebase.utils";
 class SignIn extends React.Component {
   constructor() {
     super();
@@ -34,6 +38,19 @@ class SignIn extends React.Component {
           value={this.state.password}
           type="password"
         />
+        <div className="button-wrapper">
+          <CustomButton
+            matter="SIGN-IN"
+            type="submit"
+            onClick={signInWithGoogle}
+          />
+          <CustomButton
+            matter="Google SIGN-IN"
+            type="submit"
+            onClick={signInWithGoogle}
+            googleSignIn="google-sign-in"
+          />
+        </div>
       </div>
     );
   }

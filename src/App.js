@@ -4,47 +4,50 @@ import HomePage from "./Pages/HomePage.jsx";
 import ShopPage from "./Pages/ShopPage.jsx";
 import AuthPage from "./Pages/AuthPage.jsx";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-function App() {
-  return (
-    <BrowserRouter>
-      <Header />
-      <Switch>
-        <div>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route path="/signin" component={AuthPage} />
-        </div>
-      </Switch>
-    </BrowserRouter>
-  );
-=======
-=======
->>>>>>> Stashed changes
+import { auth, createUserProfile } from "./Firebase/firebase.utils";
+
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentUSer: "",
+      currentUser: "",
     };
+  }
+  //Function which will make/cancel subscription to Firebase onAuthStateChanged method
+  unsubscribeFromAuth = null;
+
+  //On Component mount
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
+      const userRef = await createUserProfile(user);
+
+      userRef.onSnapshot((snapShot) => {
+        this.setState({
+          currentUser: {
+            id: snapShot.id,
+            ...snapShot.data(),
+          },
+        });
+      });
+    });
+  }
+
+  //On Component unmount, we want to end the subscription
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
   }
   render() {
     return (
       <BrowserRouter>
+        <Header currentUser={this.state.currentUser} />
         <Switch>
-          <div>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/shop" component={ShopPage} />
-          </div>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route path="/signin" component={AuthPage} />
         </Switch>
       </BrowserRouter>
     );
   }
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }
 
 export default App;

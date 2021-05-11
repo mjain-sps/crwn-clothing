@@ -19,7 +19,18 @@
     width: 100%;
     display: flex;
     justify-content: flex-end;
+
     justify-self: flex-end;
+
+
+    > div > span {
+      transition: 300ms ease-in;
+      margin-right: 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+
     > a {
       transition: 300ms ease-in;
       margin-right: 20px;

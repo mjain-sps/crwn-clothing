@@ -9,3 +9,13 @@ export const toggleCartDropDown = () => (dispatch) => {
 export const addToCart = (item) => (dispatch) => {
   dispatch({ type: CART_TYPES.ADD_TO_CART, payload: item });
 };
+
+//Action to Remove from Cart
+export const removeFromCart = (item) => (dispatch) => {
+  dispatch({ type: CART_TYPES.REMOVE_FROM_CART, payload: item });
+};
+
+//Action which reduces the Quantity of item by 1
+export const removeOneFromCart = (item) => (dispatch) => {
+  dispatch({ type: CART_TYPES.REMOVE_ONE_FROM_CART, payload: item });
+};

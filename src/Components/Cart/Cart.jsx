@@ -4,6 +4,9 @@ import "../../CSS/Cart/cartComponent.scss";
 import { useDispatch, useSelector } from "react-redux";
 //Importing Actions
 import { toggleCartDropDown } from "../../Actions/Cart.Actions.js";
+
+//importing function to calculate cart items total to display inside cart icon
+import { getCartItemCount } from "../../Reducers/Utils/cart.utils.js";
 function Cart() {
   const dispatch = useDispatch();
 
@@ -16,7 +19,7 @@ function Cart() {
   return (
     <div className="cart-wrapper" onClick={handleToggle}>
       <CartLogo className="cart-logo" />
-      <span>{cartItems && cartItems.length}</span>
+      <span>{cartItems && getCartItemCount(cartItems)}</span>
     </div>
   );
 }

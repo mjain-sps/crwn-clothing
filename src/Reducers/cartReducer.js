@@ -1,8 +1,13 @@
 import { CART_TYPES } from "../Action.Types/Cart.Types";
-import { addToCartFunction } from "./Utils/cart.utils";
+import {
+  addToCartFunction,
+  removeFromCartFunction,
+  removeOneFromCartFunction,
+} from "./Utils/cart.utils";
 const initialState = {
   toggleDropdown: false,
   cartItems: [],
+  cartItemsTotal: 0,
 };
 
 export const cartReducer = (state = initialState, action) => {
@@ -17,6 +22,18 @@ export const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems: addToCartFunction(state.cartItems, action.payload),
+      };
+
+    case CART_TYPES.REMOVE_FROM_CART:
+      return {
+        ...state,
+        cartItems: removeFromCartFunction(state.cartItems, action.payload),
+      };
+
+    case CART_TYPES.REMOVE_ONE_FROM_CART:
+      return {
+        ...state,
+        cartIems: removeOneFromCartFunction(state.cartItems, action.payload),
       };
 
     default:

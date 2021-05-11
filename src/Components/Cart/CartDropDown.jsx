@@ -1,7 +1,11 @@
 import React from "react";
 import "../../CSS/Cart/cartDropDown.scss";
 import CustomButton from "../CustomButton";
-function CartDropDown({ cartItems }) {
+import { withRouter } from "react-router-dom";
+import { toggleCartDropDown } from "../../Actions/Cart.Actions.js";
+import { useDispatch } from "react-redux";
+function CartDropDown({ cartItems, history }) {
+  const dispatch = useDispatch();
   return (
     <div className="cartdropdown">
       {cartItems && cartItems.length > 0 ? (
@@ -20,7 +24,15 @@ function CartDropDown({ cartItems }) {
             );
           })}
           <div>
-            <CustomButton matter="CHECKOUT" type="button" />
+            <CustomButton
+              matter="CHECKOUT"
+              type="button"
+              disabled={cartItems && cartItems.length === 0}
+              onClick={() => {
+                history.push("/checkout");
+                dispatch(toggleCartDropDown());
+              }}
+            />
           </div>
         </div>
       ) : (
@@ -30,4 +42,6 @@ function CartDropDown({ cartItems }) {
   );
 }
 
-export default CartDropDown;
+export default withRouter(CartDropDown);
+{
+}

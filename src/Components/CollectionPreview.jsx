@@ -12,13 +12,12 @@ class CollectionPreview extends React.Component {
   }
   render() {
     const { collection } = this.state;
-    console.log(collection);
     return (
       <div className="collection-preview-wrapper">
         {collection.map((item) => {
           return (
             <>
-              <div>
+              <div key={item.id}>
                 <h1>{item.title.toUpperCase()}</h1>
               </div>
               <div>

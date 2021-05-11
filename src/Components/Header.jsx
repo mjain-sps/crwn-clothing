@@ -12,8 +12,6 @@ function Header({ currentUser }) {
   const cartFromState = useSelector((state) => state.cart);
   const { toggleDropdown, cartItems } = cartFromState;
 
-  console.log(currentUser);
-
   return (
     <>
       <div className="header-wrapper">

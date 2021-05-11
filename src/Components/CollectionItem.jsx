@@ -16,7 +16,7 @@ function CollectionItem({ items }) {
         .map((item) => {
           return (
             <>
-              <div className="collection-item-container">
+              <div className="collection-item-container" key={item.id}>
                 <div className="collection-item-header">
                   <div className="collection-item-overlay">
                     <div

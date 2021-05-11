@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "../Components/Input";
 import CustomButton from "../Components/CustomButton";
-import { auth } from "../Firebase/firebase.utils";
+import { auth, createUserProfile } from "../Firebase/firebase.utils";
 class SignUp extends React.Component {
   constructor() {
     super();
@@ -11,23 +11,37 @@ class SignUp extends React.Component {
       password2: "",
       email: "",
     };
-    console.log(this.state);
   }
   handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
     this.setState({ [name]: value });
   };
 
   //Function to Signup The User
   handleSignup = async (event) => {
+    event.preventDefault();
+
     const { name, password1: password, password2, email } = this.state;
     if (password !== password2) {
       alert("Passwords do not macth. Please try again later");
     }
-    event.preventDefault();
-    const data = await auth.createUserWithEmailAndPassword(email, password);
-    console.log(data);
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      await createUserProfile(user, { displayName: name });
+
+      //Basically to clear the form
+      this.setState({
+        name: "",
+        password1: "",
+        password2: "",
+        email: "",
+      });
+    } catch (error) {
+      console.log(`error: ${error.message}`);
+    }
   };
   render() {
     return (

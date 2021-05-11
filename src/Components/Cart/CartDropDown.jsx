@@ -1,12 +1,25 @@
 import React from "react";
 import "../../CSS/Cart/cartDropDown.scss";
-function CartDropDown() {
+function CartDropDown({ cartItems }) {
   return (
     <div className="cartdropdown-wrapper">
-      <div>Item no 1</div>
-      <div>Item no 2</div>
-      <div>Item no 3</div>
-      <div>Item no 4</div>
+      {cartItems && cartItems.length > 0 ? (
+        cartItems.map((item) => {
+          return (
+            <div key={item.id} className="cartdropdown-cartItems">
+              <img src={item.imageUrl} />
+              <div>
+                <span>{item.name}</span>
+                <span>
+                  $ {item.price} X {item.quantity}
+                </span>
+              </div>
+            </div>
+          );
+        })
+      ) : (
+        <span>You have no cart Items</span>
+      )}
     </div>
   );
 }

@@ -6,12 +6,12 @@ import "../CSS/Headers/header.scss";
 import Cart from "./Cart/Cart";
 import CartDropDown from "./Cart/CartDropDown";
 import { useSelector } from "react-redux";
-function Header() {
-  const cartFromState = useSelector((state) => state.cart);
-  const { toggleDropdown } = cartFromState;
 
 import { auth } from "../Firebase/firebase.utils";
 function Header({ currentUser }) {
+  const cartFromState = useSelector((state) => state.cart);
+  const { toggleDropdown, cartItems } = cartFromState;
+
   console.log(currentUser);
 
   return (
@@ -26,7 +26,13 @@ function Header({ currentUser }) {
         <div className="header-items">
           <Link to="/shop">SHOP</Link>
           <Link to="/contact">CONTACT</Link>
-          <Link to="/signin">SIGN IN</Link>
+          {currentUser ? (
+            <div>
+              <span onClick={() => auth.signOut()}>SIGN OUT</span>
+            </div>
+          ) : (
+            <Link to="/signin">SIGN IN</Link>
+          )}
           <div className="cart-logo">
             <Cart />
           </div>
@@ -35,26 +41,12 @@ function Header({ currentUser }) {
 
       {toggleDropdown ? (
         <div>
-          <CartDropDown />
+          <CartDropDown cartItems={cartItems} />
         </div>
       ) : (
         ""
       )}
     </>
-
-      <div className="header-items">
-        <Link to="/shop">SHOP</Link>
-        <Link to="/contact">CONTACT</Link>
-        {currentUser ? (
-          <div>
-            <span onClick={() => auth.signOut()}>SIGN OUT</span>
-          </div>
-        ) : (
-          <Link to="/signin">SIGN IN</Link>
-        )}
-      </div>
-    </div>
-
   );
 }
 

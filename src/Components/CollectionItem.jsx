@@ -1,8 +1,14 @@
 import React from "react";
 import "../CSS/CollectionPreview/collection-item.scss";
-
+import CustomButton from "./CustomButton";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Actions/Cart.Actions";
 function CollectionItem({ items }) {
-  console.log(items);
+  const dispatch = useDispatch();
+  const handleAddToCart = (event, item) => {
+    event.preventDefault();
+    dispatch(addToCart(item));
+  };
   return (
     <div className="collection-item-wrapper">
       {items
@@ -22,7 +28,11 @@ function CollectionItem({ items }) {
                       }}
                     >
                       <div className="collection-item-content">
-                        <button>ADD TO CART</button>
+                        <CustomButton
+                          matter="ADD TO CART"
+                          type="button"
+                          onClick={(event) => handleAddToCart(event, item)}
+                        />
                       </div>
                     </div>
                   </div>

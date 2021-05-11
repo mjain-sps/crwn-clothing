@@ -16,6 +16,20 @@
   div {
     margin: 10px 2px;
   }
+  .cartdropdown-cartItems--wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .checkout-button {
+    position: absolute;
+    bottom: 2%;
+    width: 90%;
+    text-align: center;
+  }
   .cartdropdown-cartItems {
     display: flex;
     justify-content: flex-start;

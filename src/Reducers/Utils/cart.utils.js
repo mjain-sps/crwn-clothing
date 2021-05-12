@@ -28,16 +28,20 @@ export const removeFromCartFunction = (cartItems, currentCartItem) => {
   return cartItems.filter((cartItem) => cartItem.id !== currentCartItem.id);
 };
 
-//Function which reduces the cart Quantity by 1
+//Function which reduces the cart Quantity by 1, also if qty is already 1, it will remove it from cart
 
 export const removeOneFromCartFunction = (cartItems, currentCartItem) => {
-  const itemExists = cartItems.find((item) => item.id === currentCartItem.id);
-  if (itemExists) {
-    return cartItems.map((data) =>
-      data.id === currentCartItem.id
-        ? { ...data, quantity: data.quantity - 1 }
-        : data
-    );
+  const itemExists = cartItems.filter(
+    (cartItem) => cartItem.id === currentCartItem.id
+  );
+
+  if (itemExists && currentCartItem.quantity == 1) {
+    return cartItems.filter((cartItem) => cartItem.id !== currentCartItem.id);
   }
-  return [...cartItems];
+
+  return cartItems.map((cartItem) =>
+    cartItem.id === currentCartItem.id
+      ? { ...currentCartItem, quantity: currentCartItem.quantity - 1 }
+      : cartItem
+  );
 };

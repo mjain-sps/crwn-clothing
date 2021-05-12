@@ -14,11 +14,11 @@ function CheckoutItems({ cartItems }) {
   };
 
   const handleQuantityDecrement = (itemToBeRemoved) => {
-    if (itemToBeRemoved.quantity === 1) {
-      dispatch(removeFromCart(itemToBeRemoved));
-    } else {
-      dispatch(removeOneFromCart(itemToBeRemoved));
-    }
+    dispatch(removeOneFromCart(itemToBeRemoved));
+  };
+
+  const handleClearCartItem = (item) => {
+    dispatch(removeFromCart(item));
   };
   return (
     <div>
@@ -53,7 +53,7 @@ function CheckoutItems({ cartItems }) {
               <span>${item.price}</span>
               <span
                 className="remove-checkout-item"
-                onClick={() => dispatch(removeFromCart(item))}
+                onClick={() => handleClearCartItem(item)}
               >
                 &#9747;
               </span>

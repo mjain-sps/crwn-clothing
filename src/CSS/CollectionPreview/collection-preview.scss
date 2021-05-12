@@ -1,1 +1,10 @@
-
+.collection-preview-wrapper {
+  h1 {
+    cursor: pointer;
+  }
+  span {
+    color: gray;
+    cursor: pointer;
+    font-size: 20px;
+  }
+}

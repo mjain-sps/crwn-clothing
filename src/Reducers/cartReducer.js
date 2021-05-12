@@ -7,7 +7,6 @@ import {
 const initialState = {
   toggleDropdown: false,
   cartItems: [],
-  cartItemsTotal: 0,
 };
 
 export const cartReducer = (state = initialState, action) => {
@@ -33,7 +32,7 @@ export const cartReducer = (state = initialState, action) => {
     case CART_TYPES.REMOVE_ONE_FROM_CART:
       return {
         ...state,
-        cartIems: removeOneFromCartFunction(state.cartItems, action.payload),
+        cartItems: removeOneFromCartFunction(state.cartItems, action.payload),
       };
 
     default:

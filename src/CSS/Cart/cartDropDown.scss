@@ -24,11 +24,16 @@
     flex-direction: column;
     align-items: center;
   }
+  .cartdropdown__custom-button {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
   .checkout-button {
     position: absolute;
     bottom: 2%;
-    width: 90%;
     text-align: center;
+    margin: 0;
   }
   .cartdropdown-cartItems {
     display: flex;

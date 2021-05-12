@@ -52,17 +52,21 @@ class SignIn extends React.Component {
             type="password"
           />
           <div className="button-wrapper">
-            <CustomButton
-              matter="SIGN-IN"
-              type="submit"
-              onClick={this.handleSubmit}
-            />
-            <CustomButton
-              matter="Google SIGN-IN"
-              type="submit"
-              onClick={signInWithGoogle}
-              googleSignIn="google-sign-in"
-            />
+            <div>
+              <CustomButton
+                matter="SIGN-IN"
+                type="submit"
+                onClick={this.handleSubmit}
+              />
+            </div>
+            <div>
+              <CustomButton
+                matter="Google SIGN-IN"
+                type="submit"
+                onClick={signInWithGoogle}
+                googleSignIn="google-sign-in"
+              />
+            </div>
           </div>
         </form>
       </div>

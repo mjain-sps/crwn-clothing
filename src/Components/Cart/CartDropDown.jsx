@@ -23,7 +23,7 @@ function CartDropDown({ cartItems, history }) {
               </div>
             );
           })}
-          <div>
+          <div className="cartdropdown__custom-button">
             <CustomButton
               matter="CHECKOUT"
               type="button"

@@ -2,7 +2,13 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from "./Reducers/rootReducer";
-const middleWare = [thunk];
+import rootSaga from "./Sagas/rootSaga";
+//setting up saga
+import createSagaMiddleWare from "redux-saga";
+
+const sagaMiddleWare = createSagaMiddleWare();
+
+const middleWare = [sagaMiddleWare];
 
 const cartFromStorage = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
@@ -18,4 +24,5 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(...middleWare))
 );
 
+sagaMiddleWare.run(rootSaga);
 export default store;

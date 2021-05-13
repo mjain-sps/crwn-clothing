@@ -50,4 +50,26 @@ export const createUserProfile = async (user, additionalData) => {
   }
   return userRef;
 };
+
+//Function to add Shop Data to Firebase
+
+export const postCollectionToFirebase = async (
+  collectionKey,
+  collectionData
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+  const { empty } = await collectionRef.get();
+
+  if (empty) {
+    const batch = firestore.batch();
+    collectionData.forEach((data) => {
+      const newDocRef = collectionRef.doc();
+      batch.set(newDocRef, data);
+    });
+    return await batch.commit();
+  }
+};
+
+//Function to fetch the data from Collections
+
 export default Firebase;

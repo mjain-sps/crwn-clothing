@@ -1,6 +1,7 @@
 import React from "react";
 import "../CSS/HomePage/menuitem.scss";
-function MenuItem({ item }) {
+import { withRouter } from "react-router-dom";
+function MenuItem({ item, history }) {
   return (
     <div className="menuitem-overflow-wrapper">
       <div
@@ -10,7 +11,11 @@ function MenuItem({ item }) {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
+          cursor: "pointer",
         }}
+        onClick={() =>
+          history.push(`/shop/?category=${item.title.toUpperCase()}`)
+        }
       >
         <div className="menuitem-content">
           <h2>{item.title}</h2>
@@ -21,4 +26,4 @@ function MenuItem({ item }) {
   );
 }
 
-export default MenuItem;
+export default withRouter(MenuItem);

@@ -3,14 +3,14 @@ import MenuItem from "./MenuItem";
 import "../CSS/HomePage/directory.css";
 import { useSelector } from "react-redux";
 function HomePageDirectory() {
-  const directoryFromState = useSelector;
-
+  const sections = useSelector((state) => state.sections);
   return (
     <>
       <div className="directory-wrapper">
-        {sections.map((item) => {
-          return <MenuItem key={item.id} item={item} />;
-        })}
+        {sections &&
+          sections.map((item) => {
+            return <MenuItem key={item.id} item={item} />;
+          })}
       </div>
     </>
   );

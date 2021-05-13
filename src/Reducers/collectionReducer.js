@@ -1,4 +1,5 @@
-import { COLLECTION_TYPES } from "../Action.Types/Collection.Types";
+import COLLECTION_TYPES from "../Action.Types/Collection.Types";
+import { reducedCollection } from "./Utils/collection.utils";
 const inititalState = {
   loading: false,
   collection: [],
@@ -6,17 +7,18 @@ const inititalState = {
 };
 
 export const collectionReducer = (state = inititalState, action) => {
-  switch (action.types) {
+  switch (action.type) {
     case COLLECTION_TYPES.COLLECTION_DATA_LOADING:
       return {
         ...state,
         loading: true,
       };
     case COLLECTION_TYPES.COLLECTION_DATA_SUCCESS:
+      console.log("payload as received in reducer", action.payload);
       return {
         ...state,
         loading: false,
-        collection: action.payload,
+        collection: reducedCollection(action.payload),
         error: null,
       };
     case COLLECTION_TYPES.COLLECTION_DATA_ERROR:

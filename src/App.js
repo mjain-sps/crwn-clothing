@@ -24,7 +24,6 @@ function App() {
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        console.log(user);
         const userRef = await createUserProfile(user);
 
         userRef.onSnapshot((snapShot) => {
@@ -40,22 +39,21 @@ function App() {
 
     //Dispatching Action to Fetch Collection using Redux SAGA
     dispatch(collectionDataLoading());
-
     return () => {
       unsubscribeFromAuth();
     };
   }, []);
 
   //useEffect to triiger a Function which will post Collection data to Firebase firestore
-  useEffect(() => {
-    if (collection) {
-      postCollectionToFirebase(
-        "collection",
-        collection.map(({ title, items }) => ({ title, items }))
-      );
-    }
-  }, [collection]);
-
+  // useEffect(() => {
+  //   if (collection) {
+  //     postCollectionToFirebase(
+  //       "collection",
+  //       collection.map(({ title, items }) => ({ title, items }))
+  //     );
+  //   }
+  // }, [collection]);
+  console.log(collection);
   //
   return (
     <BrowserRouter>
